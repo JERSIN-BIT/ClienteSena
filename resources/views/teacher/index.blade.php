@@ -7,9 +7,11 @@
 
             <h1>LISTAR INSTRUCTORES</h1>
 
-            <a href="{{ route('teacher.create') }}" class="btn btn-success">
-                + Nuevo instructor
-            </a>
+            @auth
+                <a href="{{ route('teacher.create') }}" class="btn btn-success">
+                    + Nuevo instructor
+                </a>
+            @endauth
 
         </div>
 
@@ -23,8 +25,10 @@
                     <th>Área</th>
                     <th>Centro</th>
                     <th>Detalle</th>
-                    <th>Actualizar</th>
-                    <th>Eliminar</th>
+                    @auth
+                        <th>Actualizar</th>
+                        <th>Eliminar</th>
+                    @endauth
                 </tr>
             </thead>
 
@@ -45,32 +49,34 @@
                             </a>
                         </td>
 
-                        <td>
-                            <a href="{{ route('teacher.edit', $teacher->id) }}" class="btn btn-warning btn-sm">
-                                Editar
-                            </a>
-                        </td>
+                        @auth
+                            <td>
+                                <a href="{{ route('teacher.edit', $teacher->id) }}" class="btn btn-warning btn-sm">
+                                    Editar
+                                </a>
+                            </td>
 
-                        <td>
-                            <form action="{{ route('teacher.destroy', $teacher->id) }}" method="POST">
+                            <td>
+                                <form action="{{ route('teacher.destroy', $teacher->id) }}" method="POST">
 
-                                @csrf
-                                @method('DELETE')
+                                    @csrf
+                                    @method('DELETE')
 
-                                <button class="btn btn-danger btn-sm"
-                                    onclick="return confirm('¿Seguro que deseas eliminar este instructor?')">
-                                    Eliminar
-                                </button>
+                                    <button class="btn btn-danger btn-sm"
+                                        onclick="return confirm('¿Seguro que deseas eliminar este instructor?')">
+                                        Eliminar
+                                    </button>
 
-                            </form>
-                        </td>
+                                </form>
+                            </td>
+                        @endauth
 
                     </tr>
 
                 @empty
 
                     <tr>
-                        <td colspan="8" class="text-center">
+                        <td colspan="{{ auth()->check() ? 8 : 6 }}" class="text-center">
                             No hay instructores registrados.
                         </td>
                     </tr>

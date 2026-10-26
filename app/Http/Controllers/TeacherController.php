@@ -9,63 +9,62 @@ class TeacherController extends Controller
 {
     private function fetchDataFromApi($url)
     {
-        $response = Http::get(config('services.senadmin.api_url') . $url);
-        $response->throw();
-
-        return $response->object();
+        $response = Http::get($url);
+        return $response->json();
     }
 
     public function index()
     {
-        $teachers = $this->fetchDataFromApi('/teachers');
+        $url = env('URL_SERVER_API');
+        $teachers = $this->fetchDataFromApi($url . '/teachers');
 
         return view('teacher.index', compact('teachers'));
     }
 
     public function create()
     {
-        $areas = $this->fetchDataFromApi('/areas');
-        $training_centers = $this->fetchDataFromApi('/training-centers');
+        $url = env('URL_SERVER_API');
+        $teacher = Http::get($url . '/teachers')->json();
 
-        return view('teacher.create', compact('areas', 'training_centers'));
+        return view('teacher.create', compact('teacher'));
     }
 
     public function store(Request $request)
     {
-        $response = Http::post(config('services.senadmin.api_url') . '/teachers', $request->except(['_token', '_method']));
-        $response->throw();
+        $url = env('URL_SERVER_API');
+        Http::post($url . '/teachers', $request->all());
 
-        return redirect()->route('teacher.index');
+        return redirect()->route('teacher.index')->with('success', 'Profesor creado correctamente.');
     }
 
     public function show($id)
     {
-        $teacher = $this->fetchDataFromApi('/teachers/' . $id);
+        $url = env('URL_SERVER_API');
+        $teacher = $this->fetchDataFromApi($url . '/teachers/' . $id);
 
         return view('teacher.show', compact('teacher'));
     }
 
     public function edit($id)
     {
-        $teacher = $this->fetchDataFromApi('/teachers/' . $id);
-        $areas = $this->fetchDataFromApi('/areas');
-        $training_centers = $this->fetchDataFromApi('/training-centers');
+        $url = env('URL_SERVER_API');
+        $teacher = $this->fetchDataFromApi($url . '/teachers/' . $id);
 
-        return view('teacher.edit', compact('teacher', 'areas', 'training_centers'));
+        return view('teacher.edit', compact('teacher'));
     }
 
     public function update(Request $request, $id)
     {
-        $response = Http::put(config('services.senadmin.api_url') . '/teachers/' . $id, $request->except(['_token', '_method']));
-        $response->throw();
+        $url = env('URL_SERVER_API');
+        Http::put($url . '/teachers/' . $id, $request->all());
 
         return redirect()->route('teacher.index');
     }
 
     public function destroy($id)
     {
-        $response = Http::delete(config('services.senadmin.api_url') . '/teachers/' . $id);
-        $response->throw();
+        $url = env('URL_SERVER_API');
+        Http::delete($url . '/teachers/' . $id);
 
         return redirect()->route('teacher.index');
     }

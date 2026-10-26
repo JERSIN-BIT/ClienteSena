@@ -58,9 +58,11 @@
                     Volver
                 </a>
 
-                <a href="{{ route('apprentice.edit', $apprentice->id) }}" class="btn btn-warning">
-                    Editar aprendiz
-                </a>
+                @auth
+                    <a href="{{ route('apprentice.edit', $apprentice->id) }}" class="btn btn-warning">
+                        Editar aprendiz
+                    </a>
+                @endauth
 
             </div>
 

@@ -10,9 +10,11 @@
                 <p>Consulta y administra la información de los aprendices registrados.</p>
             </div>
 
-            <a href="{{ route('apprentice.create') }}" class="btn btn-success">
-                + Nuevo aprendiz
-            </a>
+            @auth
+                <a href="{{ route('apprentice.create') }}" class="btn btn-success">
+                    + Nuevo aprendiz
+                </a>
+            @endauth
         </div>
 
         <div class="table-card">
@@ -35,8 +37,10 @@
                             <th>Id-Curso</th>
                             <th>Id-Computador</th>
                             <th>Detalle</th>
-                            <th>Actualizar</th>
-                            <th>Eliminar</th>
+                            @auth
+                                <th>Actualizar</th>
+                                <th>Eliminar</th>
+                            @endauth
                         </tr>
                     </thead>
 
@@ -66,35 +70,37 @@
                                     </a>
                                 </td>
 
-                                <td>
-                                    <a href="{{ route('apprentice.edit', $apprentice->id) }}"
-                                        class="btn btn-warning btn-sm">
-                                        Editar
-                                    </a>
-                                </td>
+                                @auth
+                                    <td>
+                                        <a href="{{ route('apprentice.edit', $apprentice->id) }}"
+                                            class="btn btn-warning btn-sm">
+                                            Editar
+                                        </a>
+                                    </td>
 
-                                <td>
+                                    <td>
 
-                                    <form action="{{ route('apprentice.destroy', $apprentice->id) }}" method="POST">
+                                        <form action="{{ route('apprentice.destroy', $apprentice->id) }}" method="POST">
 
-                                        @csrf
-                                        @method('DELETE')
+                                            @csrf
+                                            @method('DELETE')
 
-                                        <button type="submit" class="btn btn-danger btn-sm"
-                                            onclick="return confirm('¿Seguro que deseas eliminar este aprendiz?')">
-                                            Eliminar
-                                        </button>
+                                            <button type="submit" class="btn btn-danger btn-sm"
+                                                onclick="return confirm('¿Seguro que deseas eliminar este aprendiz?')">
+                                                Eliminar
+                                            </button>
 
-                                    </form>
+                                        </form>
 
-                                </td>
+                                    </td>
+                                @endauth
 
                             </tr>
 
                         @empty
 
                             <tr>
-                                <td colspan="9" class="empty-message">
+                                <td colspan="{{ auth()->check() ? 9 : 7 }}" class="empty-message">
                                     No hay aprendices registrados.
                                 </td>
                             </tr>

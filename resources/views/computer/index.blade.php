@@ -7,9 +7,11 @@
 
             <h1>LISTAR COMPUTADORES</h1>
 
-            <a href="{{ route('computer.create') }}" class="btn btn-success">
-                + Nuevo computador
-            </a>
+            @auth
+                <a href="{{ route('computer.create') }}" class="btn btn-success">
+                    + Nuevo computador
+                </a>
+            @endauth
 
         </div>
 
@@ -21,8 +23,10 @@
                     <th>Número</th>
                     <th>Marca</th>
                     <th>Detalle</th>
-                    <th>Actualizar</th>
-                    <th>Eliminar</th>
+                    @auth
+                        <th>Actualizar</th>
+                        <th>Eliminar</th>
+                    @endauth
                 </tr>
             </thead>
 
@@ -41,32 +45,34 @@
                             </a>
                         </td>
 
-                        <td>
-                            <a href="{{ route('computer.edit', $computer->id) }}" class="btn btn-warning btn-sm">
-                                Editar
-                            </a>
-                        </td>
+                        @auth
+                            <td>
+                                <a href="{{ route('computer.edit', $computer->id) }}" class="btn btn-warning btn-sm">
+                                    Editar
+                                </a>
+                            </td>
 
-                        <td>
-                            <form action="{{ route('computer.destroy', $computer->id) }}" method="POST">
+                            <td>
+                                <form action="{{ route('computer.destroy', $computer->id) }}" method="POST">
 
-                                @csrf
-                                @method('DELETE')
+                                    @csrf
+                                    @method('DELETE')
 
-                                <button class="btn btn-danger btn-sm"
-                                    onclick="return confirm('¿Seguro que deseas eliminar este computador?')">
-                                    Eliminar
-                                </button>
+                                    <button class="btn btn-danger btn-sm"
+                                        onclick="return confirm('¿Seguro que deseas eliminar este computador?')">
+                                        Eliminar
+                                    </button>
 
-                            </form>
-                        </td>
+                                </form>
+                            </td>
+                        @endauth
 
                     </tr>
 
                 @empty
 
                     <tr>
-                        <td colspan="6" class="text-center">
+                        <td colspan="{{ auth()->check() ? 6 : 4 }}" class="text-center">
                             No hay computadores registrados.
                         </td>
                     </tr>

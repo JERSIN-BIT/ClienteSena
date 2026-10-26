@@ -1,92 +1,40 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ApprenticeController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\ComputerController;
 use App\Http\Controllers\CourseController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TrainingCenterController;
 
-// Rutas públicas
-Route::get('/', function () {
-    if (auth()->check()) {
-        return redirect()->route('admin.dashboard');
-    }
+/*
+|--------------------------------------------------------------------------
+| Rutas Principales / Autenticación
+|--------------------------------------------------------------------------
+*/
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-    $courses = Course::with(['area', 'trainingCenter'])->latest()->get();
+Route::view('/login', 'auth.login')->name('login');
+Route::view('/register', 'auth.register')->name('register');
+Route::view('/admin/dashboard', 'dashboard.admin')->name('admin.dashboard');
 
-    return view('home', compact('courses'));})->name('home');
+/*
+|--------------------------------------------------------------------------
+| Recursos del Sistema (Equivalente a todas las rutas de ClienteAdminSena)
+|--------------------------------------------------------------------------
+*/
+Route::resource('area', AreaController::class);
+Route::resource('training_center', TrainingCenterController::class);
+Route::resource('computer', ComputerController::class);
+Route::resource('teacher', TeacherController::class);
+Route::resource('course', CourseController::class);
+Route::resource('apprentice', ApprenticeController::class);
 
-Route::get('course/list', [CourseController::class, 'index'])->name('course.index');
-Route::get('course/show/{id}', [CourseController::class, 'show'])->name('course.show');
-
-// Autenticación
-Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
-Route::post('/register', [AuthController::class, 'register']);
-
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-Route::post('/login', [AuthController::class, 'login']);
-
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-// Panel administrativo
-Route::get('/admin/dashboard', [DashboardController::class, 'admin'])
-    ->middleware('auth')
-    ->name('admin.dashboard');
-
-// Gestión administrativa
-Route::middleware('auth')->group(function () {
-    // Aprendices
-    Route::get('apprentice/show/{id}', [ApprenticeController::class, 'show'])->name('apprentice.show');
-    Route::get('apprentice/list', [ApprenticeController::class, 'index'])->name('apprentice.index');
-    Route::get('apprentice/create', [ApprenticeController::class, 'create'])->name('apprentice.create');
-    Route::post('apprentice/store', [ApprenticeController::class, 'store'])->name('apprentice.store');
-    Route::get('apprentice/{apprentice}/edit', [ApprenticeController::class, 'edit'])->name('apprentice.edit');
-    Route::put('apprentice/{apprentice}', [ApprenticeController::class, 'update'])->name('apprentice.update');
-    Route::delete('apprentice/{apprentice}', [ApprenticeController::class, 'destroy'])->name('apprentice.destroy');
-
-    // Áreas
-    Route::get('area/show/{id}', [AreaController::class, 'show'])->name('area.show');
-    Route::get('area/list', [AreaController::class, 'index'])->name('area.index');
-    Route::get('area/create', [AreaController::class, 'create'])->name('area.create');
-    Route::post('area/store', [AreaController::class, 'store'])->name('area.store');
-    Route::get('area/{area}/edit', [AreaController::class, 'edit'])->name('area.edit');
-    Route::put('area/{area}', [AreaController::class, 'update'])->name('area.update');
-    Route::delete('area/{area}', [AreaController::class, 'destroy'])->name('area.destroy');
-
-    // Computadores
-    Route::get('computer/show/{id}', [ComputerController::class, 'show'])->name('computer.show');
-    Route::get('computer/list', [ComputerController::class, 'index'])->name('computer.index');
-    Route::get('computer/create', [ComputerController::class, 'create'])->name('computer.create');
-    Route::post('computer/store', [ComputerController::class, 'store'])->name('computer.store');
-    Route::get('computer/{computer}/edit', [ComputerController::class, 'edit'])->name('computer.edit');
-    Route::put('computer/{computer}', [ComputerController::class, 'update'])->name('computer.update');
-    Route::delete('computer/{computer}', [ComputerController::class, 'destroy'])->name('computer.destroy');
-
-    // Formaciones
-    Route::get('course/create', [CourseController::class, 'create'])->name('course.create');
-    Route::post('course/store', [CourseController::class, 'store'])->name('course.store');
-    Route::get('course/{course}/edit', [CourseController::class, 'edit'])->name('course.edit');
-    Route::put('course/{course}', [CourseController::class, 'update'])->name('course.update');
-    Route::delete('course/{course}', [CourseController::class, 'destroy'])->name('course.destroy');
-
-    // Instructores
-    Route::get('teacher/show/{id}', [TeacherController::class, 'show'])->name('teacher.show');
-    Route::get('teacher/list', [TeacherController::class, 'index'])->name('teacher.index');
-    Route::get('teacher/create', [TeacherController::class, 'create'])->name('teacher.create');
-    Route::post('teacher/store', [TeacherController::class, 'store'])->name('teacher.store');
-    Route::get('teacher/{teacher}/edit', [TeacherController::class, 'edit'])->name('teacher.edit');
-    Route::put('teacher/{teacher}', [TeacherController::class, 'update'])->name('teacher.update');
-    Route::delete('teacher/{teacher}', [TeacherController::class, 'destroy'])->name('teacher.destroy');
-
-    // Centros de formación
-    Route::get('training_center/show/{id}', [TrainingCenterController::class, 'show'])->name('trainingcenter.show');
-    Route::get('training_center/list', [TrainingCenterController::class, 'index'])->name('trainingcenter.index');
-    Route::get('training_center/create', [TrainingCenterController::class, 'create'])->name('trainingcenter.create');
-    Route::post('training_center/store', [TrainingCenterController::class, 'store'])->name('trainingcenter.store');
-    Route::get('training_center/{trainingCenter}/edit', [TrainingCenterController::class, 'edit'])->name('trainingcenter.edit');
-    Route::put('training_center/{trainingCenter}', [TrainingCenterController::class, 'update'])->name('trainingcenter.update');
-    Route::delete('training_center/{trainingCenter}', [TrainingCenterController::class, 'destroy'])->name('trainingcenter.destroy');
-});
+// Alias de conveniencia para las listas en plural (por si tus botones o vistas llaman 'areas', 'centers', etc.)
+Route::get('areas', [AreaController::class, 'index']);
+Route::get('centers', [TrainingCenterController::class, 'index']);
+Route::get('computers', [ComputerController::class, 'index']);
+Route::get('teachers', [TeacherController::class, 'index']);
+Route::get('courses', [CourseController::class, 'index']);

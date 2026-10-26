@@ -84,13 +84,15 @@
                     <div class="col-md-6 col-lg-4">
                         <a href="{{ route('course.show', $course->id) }}" class="formation-card">
                             <div class="formation-card-top">
-                                <span class="course-status {{ $course->availability_status === 'disponible' ? 'is-available' : 'is-started' }}">
+                                <span
+                                    class="course-status {{ $course->availability_status === 'disponible' ? 'is-available' : 'is-started' }}">
                                     {{ $course->availability_status === 'disponible' ? 'Disponible' : 'Ya comenzó' }}
                                 </span>
                                 <span class="formation-duration">{{ $course->duration }}</span>
                             </div>
                             @if ($course->image)
-                                <img src="{{ config('services.senadmin.asset_url') . '/storage/' . $course->image }}" alt="Imagen de {{ $course->course_number }}" class="img-fluid mb-3">
+                                <img src="{{ asset('storage/' . $course->image) }}"
+                                    alt="Imagen de {{ $course->course_number }}" class="img-fluid mb-3">
                             @endif
                             <h3>{{ $course->course_number }}</h3>
                             <p>{{ Str::limit($course->description ?: 'Conoce esta formación del SENA.', 115) }}</p>
@@ -333,5 +335,4 @@
         </div>
 
     </section>
-
 @endsection

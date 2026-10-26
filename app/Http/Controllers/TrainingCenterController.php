@@ -9,58 +9,62 @@ class TrainingCenterController extends Controller
 {
     private function fetchDataFromApi($url)
     {
-        $response = Http::get(config('services.senadmin.api_url') . $url);
-        $response->throw();
-
-        return $response->object();
+        $response = Http::get($url);
+        return $response->json();
     }
 
     public function index()
     {
-        $trainingCenters = $this->fetchDataFromApi('/training-centers');
+        $url = env('URL_SERVER_API');
+        $training_centers = $this->fetchDataFromApi($url . '/training_centers');
 
-        return view('training_center.index', compact('trainingCenters'));
+        return view('training_center.index', compact('training_centers'));
     }
 
     public function create()
     {
-        return view('training_center.create');
+        $url = env('URL_SERVER_API');
+        $training_center = Http::get($url . '/training_centers')->json();
+
+        return view('training_center.create', compact('training_center'));
     }
 
     public function store(Request $request)
     {
-        $response = Http::post(config('services.senadmin.api_url') . '/training-centers', $request->except(['_token', '_method']));
-        $response->throw();
+        $url = env('URL_SERVER_API');
+        Http::post($url . '/training_centers', $request->all());
 
-        return redirect()->route('trainingcenter.index');
+        return redirect()->route('trainingcenter.index')->with('success', 'Centro de formación creado correctamente.');
     }
 
     public function show($id)
     {
-        $trainingCenter = $this->fetchDataFromApi('/training-centers/' . $id);
+        $url = env('URL_SERVER_API');
+        $training_center = $this->fetchDataFromApi($url . '/training_centers/' . $id);
 
-        return view('training_center.show', compact('trainingCenter'));
+        return view('training_center.show', compact('training_center'));
     }
 
     public function edit($id)
     {
-        $trainingCenter = $this->fetchDataFromApi('/training-centers/' . $id);
+        $url = env('URL_SERVER_API');
+        $training_center = $this->fetchDataFromApi($url . '/training_centers/' . $id);
 
-        return view('training_center.edit', compact('trainingCenter'));
+        return view('training_center.edit', compact('training_center'));
     }
 
     public function update(Request $request, $id)
     {
-        $response = Http::put(config('services.senadmin.api_url') . '/training-centers/' . $id, $request->except(['_token', '_method']));
-        $response->throw();
+        $url = env('URL_SERVER_API');
+        Http::put($url . '/training_centers/' . $id, $request->all());
 
         return redirect()->route('trainingcenter.index');
     }
 
     public function destroy($id)
     {
-        $response = Http::delete(config('services.senadmin.api_url') . '/training-centers/' . $id);
-        $response->throw();
+        $url = env('URL_SERVER_API');
+        Http::delete($url . '/training_centers/' . $id);
 
         return redirect()->route('trainingcenter.index');
     }

@@ -9,58 +9,62 @@ class ComputerController extends Controller
 {
     private function fetchDataFromApi($url)
     {
-        $response = Http::get(config('services.senadmin.api_url') . $url);
-        $response->throw();
-
-        return $response->object();
+        $response = Http::get($url);
+        return $response->json();
     }
 
     public function index()
     {
-        $computers = $this->fetchDataFromApi('/computers');
+        $url = env('URL_SERVER_API');
+        $computers = $this->fetchDataFromApi($url . '/computers');
 
         return view('computer.index', compact('computers'));
     }
 
     public function create()
     {
-        return view('computer.create');
+        $url = env('URL_SERVER_API');
+        $computer = Http::get($url . '/computers')->json();
+
+        return view('computer.create', compact('computer'));
     }
 
     public function store(Request $request)
     {
-        $response = Http::post(config('services.senadmin.api_url') . '/computers', $request->except(['_token', '_method']));
-        $response->throw();
+        $url = env('URL_SERVER_API');
+        Http::post($url . '/computers', $request->all());
 
-        return redirect()->route('computer.index');
+        return redirect()->route('computer.index')->with('success', 'Computador creado correctamente.');
     }
 
     public function show($id)
     {
-        $computer = $this->fetchDataFromApi('/computers/' . $id);
+        $url = env('URL_SERVER_API');
+        $computer = $this->fetchDataFromApi($url . '/computers/' . $id);
 
         return view('computer.show', compact('computer'));
     }
 
     public function edit($id)
     {
-        $computer = $this->fetchDataFromApi('/computers/' . $id);
+        $url = env('URL_SERVER_API');
+        $computer = $this->fetchDataFromApi($url . '/computers/' . $id);
 
         return view('computer.edit', compact('computer'));
     }
 
     public function update(Request $request, $id)
     {
-        $response = Http::put(config('services.senadmin.api_url') . '/computers/' . $id, $request->except(['_token', '_method']));
-        $response->throw();
+        $url = env('URL_SERVER_API');
+        Http::put($url . '/computers/' . $id, $request->all());
 
         return redirect()->route('computer.index');
     }
 
     public function destroy($id)
     {
-        $response = Http::delete(config('services.senadmin.api_url') . '/computers/' . $id);
-        $response->throw();
+        $url = env('URL_SERVER_API');
+        Http::delete($url . '/computers/' . $id);
 
         return redirect()->route('computer.index');
     }

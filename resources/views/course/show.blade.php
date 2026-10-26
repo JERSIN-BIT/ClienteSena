@@ -12,7 +12,8 @@
 
                 <div class="course-detail-heading">
                     <div>
-                        <span class="course-status {{ $course->availability_status === 'disponible' ? 'is-available' : 'is-started' }}">
+                        <span
+                            class="course-status {{ $course->availability_status === 'disponible' ? 'is-available' : 'is-started' }}">
                             {{ $course->availability_status === 'disponible' ? 'Disponible' : 'Ya comenzó' }}
                         </span>
                         <h2>{{ $course->course_number }}</h2>
@@ -25,7 +26,8 @@
                 <p><strong>Centro:</strong> {{ $course->trainingCenter->name ?? 'Sin centro' }}</p>
 
                 @if ($course->image)
-                    <img src="{{ config('services.senadmin.asset_url') . '/storage/' . $course->image }}" alt="Imagen de {{ $course->course_number }}" class="img-fluid mb-3" style="max-width: 500px;">
+                    <img src="{{ asset('storage/' . $course->image) }}" alt="Imagen de {{ $course->course_number }}"
+                        class="img-fluid mb-3" style="max-width: 500px;">
                 @else
                     <p>Sin imagen</p>
                 @endif

@@ -9,63 +9,65 @@ class ApprenticeController extends Controller
 {
     private function fetchDataFromApi($url)
     {
-        $response = Http::get(config('services.senadmin.api_url') . $url);
-        $response->throw();
-
-        return $response->object();
+        $response = Http::get($url);
+        return $response->json();
     }
 
     public function index()
     {
-        $apprentices = $this->fetchDataFromApi('/apprentices');
+        $url = env('URL_SERVER_API');
+        $apprentices = $this->fetchDataFromApi($url . '/apprentices');
 
         return view('apprentice.index', compact('apprentices'));
     }
 
     public function create()
     {
-        $courses = $this->fetchDataFromApi('/courses');
-        $computers = $this->fetchDataFromApi('/computers');
+        $url = env('URL_SERVER_API');
+        $courses = $this->fetchDataFromApi($url . '/courses');
+        $computers = $this->fetchDataFromApi($url . '/computers');
 
         return view('apprentice.create', compact('courses', 'computers'));
     }
 
     public function store(Request $request)
     {
-        $response = Http::post(config('services.senadmin.api_url') . '/apprentices', $request->except(['_token', '_method']));
-        $response->throw();
+        $url = env('URL_SERVER_API');
+        Http::post($url . '/apprentices', $request->all());
 
         return redirect()->route('apprentice.index');
     }
 
     public function show($id)
     {
-        $apprentice = $this->fetchDataFromApi('/apprentices/' . $id);
+        $url = env('URL_SERVER_API');
+        $apprentice = $this->fetchDataFromApi($url . '/apprentices/' . $id);
 
         return view('apprentice.show', compact('apprentice'));
     }
 
     public function edit($id)
     {
-        $apprentice = $this->fetchDataFromApi('/apprentices/' . $id);
-        $courses = $this->fetchDataFromApi('/courses');
-        $computers = $this->fetchDataFromApi('/computers');
+        $url = env('URL_SERVER_API');
+        $apprentice = $this->fetchDataFromApi($url . '/apprentices/' . $id);
+        $courses = $this->fetchDataFromApi($url . '/courses');
+        $computers = $this->fetchDataFromApi($url . '/computers');
 
         return view('apprentice.edit', compact('apprentice', 'courses', 'computers'));
     }
 
     public function update(Request $request, $id)
     {
-        $response = Http::put(config('services.senadmin.api_url') . '/apprentices/' . $id, $request->except(['_token', '_method']));
-        $response->throw();
+        $url = env('URL_SERVER_API');
+        Http::put($url . '/apprentices/' . $id, $request->all());
 
         return redirect()->route('apprentice.index');
     }
 
     public function destroy($id)
     {
-        $response = Http::delete(config('services.senadmin.api_url') . '/apprentices/' . $id);
-        $response->throw();
+        $url = env('URL_SERVER_API');
+        Http::delete($url . '/apprentices/' . $id);
 
         return redirect()->route('apprentice.index');
     }

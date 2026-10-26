@@ -7,9 +7,11 @@
 
             <h1>LISTAR CENTROS DE FORMACIÓN</h1>
 
-            <a href="{{ route('trainingcenter.create') }}" class="btn btn-success">
-                + Nuevo centro
-            </a>
+            @auth
+                <a href="{{ route('trainingcenter.create') }}" class="btn btn-success">
+                    + Nuevo centro
+                </a>
+            @endauth
 
         </div>
 
@@ -21,8 +23,10 @@
                     <th>Nombre</th>
                     <th>Ubicación</th>
                     <th>Detalle</th>
-                    <th>Actualizar</th>
-                    <th>Eliminar</th>
+                    @auth
+                        <th>Actualizar</th>
+                        <th>Eliminar</th>
+                    @endauth
                 </tr>
             </thead>
 
@@ -44,32 +48,34 @@
                             </a>
                         </td>
 
-                        <td>
-                            <a href="{{ route('trainingcenter.edit', $trainingCenter->id) }}" class="btn btn-warning btn-sm">
-                                Editar
-                            </a>
-                        </td>
+                        @auth
+                            <td>
+                                <a href="{{ route('trainingcenter.edit', $trainingCenter->id) }}" class="btn btn-warning btn-sm">
+                                    Editar
+                                </a>
+                            </td>
 
-                        <td>
-                            <form action="{{ route('trainingcenter.destroy', $trainingCenter->id) }}" method="POST">
+                            <td>
+                                <form action="{{ route('trainingcenter.destroy', $trainingCenter->id) }}" method="POST">
 
-                                @csrf
-                                @method('DELETE')
+                                    @csrf
+                                    @method('DELETE')
 
-                                <button class="btn btn-danger btn-sm"
-                                    onclick="return confirm('¿Seguro que deseas eliminar este centro?')">
-                                    Eliminar
-                                </button>
+                                    <button class="btn btn-danger btn-sm"
+                                        onclick="return confirm('¿Seguro que deseas eliminar este centro?')">
+                                        Eliminar
+                                    </button>
 
-                            </form>
-                        </td>
+                                </form>
+                            </td>
+                        @endauth
 
                     </tr>
 
                 @empty
 
                     <tr>
-                        <td colspan="6" class="text-center">
+                        <td colspan="{{ auth()->check() ? 6 : 4 }}" class="text-center">
                             No hay centros registrados.
                         </td>
                     </tr>

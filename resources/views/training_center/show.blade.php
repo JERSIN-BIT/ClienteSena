@@ -15,9 +15,11 @@
 
                 <p><strong>Ubicación:</strong> {{ $trainingCenter->location }}</p>
 
-                <a href="{{ route('trainingcenter.edit', $trainingCenter->id) }}" class="btn btn-warning">
-                    Editar
-                </a>
+                @auth
+                    <a href="{{ route('trainingcenter.edit', $trainingCenter->id) }}" class="btn btn-warning">
+                        Editar
+                    </a>
+                @endauth
 
                 <a href="{{ route('trainingcenter.index') }}" class="btn btn-secondary">
                     Volver

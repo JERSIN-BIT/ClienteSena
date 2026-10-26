@@ -15,9 +15,11 @@
                 <p><strong>Área:</strong> {{ $teacher->area_id }}</p>
                 <p><strong>Centro:</strong> {{ $teacher->training_center_id }}</p>
 
-                <a href="{{ route('teacher.edit', $teacher->id) }}" class="btn btn-warning">
-                    Editar
-                </a>
+                @auth
+                    <a href="{{ route('teacher.edit', $teacher->id) }}" class="btn btn-warning">
+                        Editar
+                    </a>
+                @endauth
 
                 <a href="{{ route('teacher.index') }}" class="btn btn-secondary">
                     Volver

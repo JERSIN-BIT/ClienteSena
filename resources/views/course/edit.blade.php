@@ -59,8 +59,10 @@
                 <div class="col-md-6 mb-3">
                     <label>Estado de la formación</label>
                     <select name="availability_status" class="form-select" required>
-                        <option value="disponible" {{ $course->availability_status === 'disponible' ? 'selected' : '' }}>Disponible</option>
-                        <option value="en curso" {{ $course->availability_status === 'en curso' ? 'selected' : '' }}>Ya comenzó</option>
+                        <option value="disponible" {{ $course->availability_status === 'disponible' ? 'selected' : '' }}>
+                            Disponible</option>
+                        <option value="en curso" {{ $course->availability_status === 'en curso' ? 'selected' : '' }}>Ya
+                            comenzó</option>
                     </select>
                 </div>
 
@@ -84,7 +86,8 @@
                 <label>Imagen</label>
                 <input type="file" name="image" class="form-control" accept="image/*">
                 @if ($course->image)
-                    <img src="{{ config('services.senadmin.asset_url') . '/storage/' . $course->image }}" alt="Imagen de {{ $course->course_number }}" class="mt-2" style="max-width: 180px;">
+                    <img src="{{ asset('storage/' . $course->image) }}" alt="Imagen de {{ $course->course_number }}"
+                        class="mt-2" style="max-width: 180px;">
                 @endif
             </div>
 

@@ -40,7 +40,8 @@
                         <td>{{ $course->course_number }}</td>
                         <td>
                             @if ($course->image)
-                                <img src="{{ config('services.senadmin.asset_url') . '/storage/' . $course->image }}" alt="Imagen de {{ $course->course_number }}" style="max-width: 100px; max-height: 70px;">
+                                <img src="{{ asset('storage/' . $course->image) }}"
+                                    alt="Imagen de {{ $course->course_number }}" style="max-width: 100px; max-height: 70px;">
                             @else
                                 Sin imagen
                             @endif
@@ -61,7 +62,8 @@
                                 <form class="d-inline" action="{{ route('course.destroy', $course->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro que deseas eliminar esta formación?')">Eliminar</button>
+                                    <button class="btn btn-danger btn-sm"
+                                        onclick="return confirm('¿Seguro que deseas eliminar esta formación?')">Eliminar</button>
                                 </form>
                             </td>
                         @endauth

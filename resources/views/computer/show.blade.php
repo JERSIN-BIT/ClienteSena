@@ -15,9 +15,11 @@
 
                 <p><strong>Marca:</strong> {{ $computer->brand }}</p>
 
-                <a href="{{ route('computer.edit', $computer->id) }}" class="btn btn-warning">
-                    Editar
-                </a>
+                @auth
+                    <a href="{{ route('computer.edit', $computer->id) }}" class="btn btn-warning">
+                        Editar
+                    </a>
+                @endauth
 
                 <a href="{{ route('computer.index') }}" class="btn btn-secondary">
                     Volver

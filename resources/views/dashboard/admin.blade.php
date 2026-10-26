@@ -7,7 +7,7 @@
             <div>
                 <span class="eyebrow">Centro de control</span>
                 <h1>Administración SENADMIN</h1>
-                <p>Gestiona la operación del centro de formación.</p>
+                <p>Bienvenido, {{ auth()->user()->name }}. Gestiona la operación del centro de formación.</p>
             </div>
         </div>
 
@@ -30,7 +30,8 @@
                                     <p>Registra y administra los aprendices del SENA.</p>
                                     <div class="admin-module-actions">
                                         <a href="{{ route('apprentice.create') }}" class="btn btn-success">Agregar</a>
-                                        <a href="{{ route('apprentice.index') }}" class="btn btn-outline-success">Ver registros</a>
+                                        <a href="{{ route('apprentice.index') }}" class="btn btn-outline-success">Ver
+                                            registros</a>
                                     </div>
                                 </article>
                             </div>
@@ -41,7 +42,8 @@
                                     <p>Administra la información de los instructores.</p>
                                     <div class="admin-module-actions">
                                         <a href="{{ route('teacher.create') }}" class="btn btn-success">Agregar</a>
-                                        <a href="{{ route('teacher.index') }}" class="btn btn-outline-success">Ver registros</a>
+                                        <a href="{{ route('teacher.index') }}" class="btn btn-outline-success">Ver
+                                            registros</a>
                                     </div>
                                 </article>
                             </div>
@@ -52,7 +54,8 @@
                                     <p>Gestiona los programas de formación disponibles.</p>
                                     <div class="admin-module-actions">
                                         <a href="{{ route('course.create') }}" class="btn btn-success">Agregar</a>
-                                        <a href="{{ route('course.index') }}" class="btn btn-outline-success">Ver registros</a>
+                                        <a href="{{ route('course.index') }}" class="btn btn-outline-success">Ver
+                                            registros</a>
                                     </div>
                                 </article>
                             </div>
@@ -81,7 +84,8 @@
                                     <p>Organiza las áreas de conocimiento del centro.</p>
                                     <div class="admin-module-actions">
                                         <a href="{{ route('area.create') }}" class="btn btn-success">Agregar</a>
-                                        <a href="{{ route('area.index') }}" class="btn btn-outline-success">Ver registros</a>
+                                        <a href="{{ route('area.index') }}" class="btn btn-outline-success">Ver
+                                            registros</a>
                                     </div>
                                 </article>
                             </div>
@@ -92,7 +96,8 @@
                                     <p>Controla el inventario de equipos disponibles.</p>
                                     <div class="admin-module-actions">
                                         <a href="{{ route('computer.create') }}" class="btn btn-success">Agregar</a>
-                                        <a href="{{ route('computer.index') }}" class="btn btn-outline-success">Ver registros</a>
+                                        <a href="{{ route('computer.index') }}" class="btn btn-outline-success">Ver
+                                            registros</a>
                                     </div>
                                 </article>
                             </div>
@@ -103,7 +108,8 @@
                                     <p>Administra los centros asociados al sistema.</p>
                                     <div class="admin-module-actions">
                                         <a href="{{ route('trainingcenter.create') }}" class="btn btn-success">Agregar</a>
-                                        <a href="{{ route('trainingcenter.index') }}" class="btn btn-outline-success">Ver registros</a>
+                                        <a href="{{ route('trainingcenter.index') }}" class="btn btn-outline-success">Ver
+                                            registros</a>
                                     </div>
                                 </article>
                             </div>
