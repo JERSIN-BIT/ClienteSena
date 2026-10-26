@@ -46,25 +46,25 @@
 
                     <tbody>
 
-                        @forelse($apprentices as $apprentice)
+                        @forelse(($apprentices ?? []) as $apprentice)
                             <tr>
 
-                                <td>{{ $apprentice->id }}</td>
+                                <td>{{ $apprentice['id'] ?? '' }}</td>
 
                                 <td>
-                                    <strong>{{ $apprentice->name }}</strong>
+                                    <strong>{{ $apprentice['name'] ?? '' }}</strong>
                                 </td>
 
-                                <td>{{ $apprentice->email }}</td>
+                                <td>{{ $apprentice['email'] ?? '' }}</td>
 
-                                <td>{{ $apprentice->cell_number }}</td>
+                                <td>{{ $apprentice['cell_number'] ?? '' }}</td>
 
-                                <td>{{ $apprentice->course_id }}</td>
+                                <td>{{ $apprentice['course_id'] ?? '' }}</td>
 
-                                <td>{{ $apprentice->computer_id }}</td>
+                                <td>{{ $apprentice['computer_id'] ?? '' }}</td>
 
                                 <td>
-                                    <a href="{{ route('apprentice.show', $apprentice->id) }}"
+                                    <a href="{{ route('apprentice.show', $apprentice['id'] ?? '') }}"
                                         class="btn btn-info btn-sm text-white">
                                         Mostrar
                                     </a>
@@ -72,7 +72,7 @@
 
                                 @auth
                                     <td>
-                                        <a href="{{ route('apprentice.edit', $apprentice->id) }}"
+                                        <a href="{{ route('apprentice.edit', $apprentice['id'] ?? '') }}"
                                             class="btn btn-warning btn-sm">
                                             Editar
                                         </a>
@@ -80,7 +80,7 @@
 
                                     <td>
 
-                                        <form action="{{ route('apprentice.destroy', $apprentice->id) }}" method="POST">
+                                        <form action="{{ route('apprentice.destroy', $apprentice['id'] ?? '') }}" method="POST">
 
                                             @csrf
                                             @method('DELETE')

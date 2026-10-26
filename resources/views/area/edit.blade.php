@@ -5,7 +5,7 @@
 
         <h1>EDITAR ÁREA</h1>
 
-        <form action="{{ route('area.update', $area->id) }}" method="POST">
+        <form action="{{ route('area.update', $area['id'] ?? '') }}" method="POST">
 
             @csrf
             @method('PUT')
@@ -14,7 +14,7 @@
 
                 <label>Nombre</label>
 
-                <input type="text" name="name" class="form-control" value="{{ $area->name }}" required>
+                <input type="text" name="name" class="form-control" value="{{ $area['name'] ?? '' }}" required>
 
             </div>
 

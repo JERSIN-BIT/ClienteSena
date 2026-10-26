@@ -34,7 +34,7 @@
                                 <li><a class="dropdown-item" href="{{ route('teacher.index') }}">Instructores</a></li>
                                 <li><a class="dropdown-item" href="{{ route('area.index') }}">Áreas</a></li>
                                 <li><a class="dropdown-item" href="{{ route('computer.index') }}">Computadores</a></li>
-                                <li><a class="dropdown-item" href="{{ route('trainingcenter.index') }}">Centros de
+                                <li><a class="dropdown-item" href="{{ route('training_center.index') }}">Centros de
                                         formación</a></li>
                             </ul>
                         </li>
@@ -49,7 +49,7 @@
                                 <li><a class="dropdown-item" href="{{ route('course.index') }}">Formaciones</a></li>
                                 <li><a class="dropdown-item" href="{{ route('area.index') }}">Áreas</a></li>
                                 <li><a class="dropdown-item" href="{{ route('computer.index') }}">Computadores</a></li>
-                                <li><a class="dropdown-item" href="{{ route('trainingcenter.index') }}">Centros de
+                                <li><a class="dropdown-item" href="{{ route('training_center.index') }}">Centros de
                                         formación</a></li>
                             </ul>
                         </li>
@@ -59,10 +59,6 @@
                     <a class="btn btn-login" href="{{ route('login') }}">Iniciar sesión</a>
                 @else
                     <span class="user-chip">Administrador</span>
-                    <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                        @csrf
-                        <button class="btn btn-login" type="submit">Cerrar sesión</button>
-                    </form>
                 @endguest
             </div>
         </div>

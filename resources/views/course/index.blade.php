@@ -34,32 +34,32 @@
 
             <tbody>
 
-                @forelse($courses as $course)
+                @forelse(($courses ?? []) as $course)
                     <tr>
 
-                        <td>{{ $course->course_number }}</td>
+                        <td>{{ $course['course_number'] ?? '' }}</td>
                         <td>
-                            @if ($course->image)
-                                <img src="{{ asset('storage/' . $course->image) }}"
-                                    alt="Imagen de {{ $course->course_number }}" style="max-width: 100px; max-height: 70px;">
+                            @if (!empty($course['image']))
+                                <img src="{{ asset('storage/' . $course['image']) }}"
+                                    alt="Imagen de {{ $course['course_number'] ?? '' }}" style="max-width: 100px; max-height: 70px;">
                             @else
                                 Sin imagen
                             @endif
                         </td>
-                        <td>{{ $course->day }}</td>
-                        <td>{{ $course->area->name ?? 'Sin área' }}</td>
-                        <td>{{ $course->trainingCenter->name ?? 'Sin centro' }}</td>
+                        <td>{{ $course['day'] ?? '' }}</td>
+                        <td>{{ $course['area']['name'] ?? 'Sin área' }}</td>
+                        <td>{{ $course['training_center']['name'] ?? ($course['trainingCenter']['name'] ?? 'Sin centro') }}</td>
 
                         <td>
-                            <a href="{{ route('course.show', $course->id) }}" class="btn btn-info btn-sm text-white">
+                            <a href="{{ route('course.show', $course['id'] ?? '') }}" class="btn btn-info btn-sm text-white">
                                 Mostrar
                             </a>
                         </td>
 
                         @auth
                             <td>
-                                <a href="{{ route('course.edit', $course->id) }}" class="btn btn-warning btn-sm">Editar</a>
-                                <form class="d-inline" action="{{ route('course.destroy', $course->id) }}" method="POST">
+                                <a href="{{ route('course.edit', $course['id'] ?? '') }}" class="btn btn-warning btn-sm">Editar</a>
+                                <form class="d-inline" action="{{ route('course.destroy', $course['id'] ?? '') }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger btn-sm"

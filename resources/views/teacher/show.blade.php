@@ -9,14 +9,14 @@
 
             <div class="card-body">
 
-                <p><strong>ID:</strong> {{ $teacher->id }}</p>
-                <p><strong>Nombre:</strong> {{ $teacher->name }}</p>
-                <p><strong>Correo:</strong> {{ $teacher->email }}</p>
-                <p><strong>Área:</strong> {{ $teacher->area_id }}</p>
-                <p><strong>Centro:</strong> {{ $teacher->training_center_id }}</p>
+                <p><strong>ID:</strong> {{ $teacher['id'] ?? '' }}</p>
+                <p><strong>Nombre:</strong> {{ $teacher['name'] ?? '' }}</p>
+                <p><strong>Correo:</strong> {{ $teacher['email'] ?? '' }}</p>
+                <p><strong>Área:</strong> {{ $teacher['area_id'] ?? '' }}</p>
+                <p><strong>Centro:</strong> {{ $teacher['training_center_id'] ?? '' }}</p>
 
                 @auth
-                    <a href="{{ route('teacher.edit', $teacher->id) }}" class="btn btn-warning">
+                    <a href="{{ route('teacher.edit', $teacher['id'] ?? '') }}" class="btn btn-warning">
                         Editar
                     </a>
                 @endauth

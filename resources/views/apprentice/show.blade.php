@@ -22,32 +22,32 @@
 
                 <div class="detail-item">
                     <span>ID</span>
-                    <strong>{{ $apprentice->id }}</strong>
+                    <strong>{{ $apprentice['id'] ?? '' }}</strong>
                 </div>
 
                 <div class="detail-item">
                     <span>Nombre</span>
-                    <strong>{{ $apprentice->name }}</strong>
+                    <strong>{{ $apprentice['name'] ?? '' }}</strong>
                 </div>
 
                 <div class="detail-item">
                     <span>Correo</span>
-                    <strong>{{ $apprentice->email }}</strong>
+                    <strong>{{ $apprentice['email'] ?? '' }}</strong>
                 </div>
 
                 <div class="detail-item">
                     <span>Número de celular</span>
-                    <strong>{{ $apprentice->cell_number }}</strong>
+                    <strong>{{ $apprentice['cell_number'] ?? '' }}</strong>
                 </div>
 
                 <div class="detail-item">
                     <span>Curso</span>
-                    <strong>{{ $apprentice->course_id }}</strong>
+                    <strong>{{ $apprentice['course_id'] ?? '' }}</strong>
                 </div>
 
                 <div class="detail-item">
                     <span>Computador</span>
-                    <strong>{{ $apprentice->computer_id }}</strong>
+                    <strong>{{ $apprentice['computer_id'] ?? '' }}</strong>
                 </div>
 
             </div>
@@ -59,7 +59,7 @@
                 </a>
 
                 @auth
-                    <a href="{{ route('apprentice.edit', $apprentice->id) }}" class="btn btn-warning">
+                    <a href="{{ route('apprentice.edit', $apprentice['id'] ?? '') }}" class="btn btn-warning">
                         Editar aprendiz
                     </a>
                 @endauth

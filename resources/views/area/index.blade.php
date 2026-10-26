@@ -31,27 +31,27 @@
 
             <tbody>
 
-                @forelse($areas as $area)
+                @forelse(($areas ?? []) as $area)
                     <tr>
 
-                        <td>{{ $area->id }}</td>
-                        <td>{{ $area->name }}</td>
+                        <td>{{ $area['id'] ?? '' }}</td>
+                        <td>{{ $area['name'] ?? '' }}</td>
 
                         <td>
-                            <a href="{{ route('area.show', $area->id) }}" class="btn btn-info btn-sm text-white">
+                            <a href="{{ route('area.show', $area['id'] ?? '') }}" class="btn btn-info btn-sm text-white">
                                 Mostrar
                             </a>
                         </td>
 
                         @auth
                             <td>
-                                <a href="{{ route('area.edit', $area->id) }}" class="btn btn-warning btn-sm">
+                                <a href="{{ route('area.edit', $area['id'] ?? '') }}" class="btn btn-warning btn-sm">
                                     Editar
                                 </a>
                             </td>
 
                             <td>
-                                <form action="{{ route('area.destroy', $area->id) }}" method="POST">
+                                <form action="{{ route('area.destroy', $area['id'] ?? '') }}" method="POST">
 
                                     @csrf
                                     @method('DELETE')

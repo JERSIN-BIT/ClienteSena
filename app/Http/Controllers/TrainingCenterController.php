@@ -7,24 +7,18 @@ use Illuminate\Support\Facades\Http;
 
 class TrainingCenterController extends Controller
 {
-    private function fetchDataFromApi($url)
-    {
-        $response = Http::get($url);
-        return $response->json();
-    }
-
     public function index()
     {
         $url = env('URL_SERVER_API');
-        $training_centers = $this->fetchDataFromApi($url . '/training_centers');
+        $trainingCenters = $this->fetchDataFromApi($url . '/training_centers');
 
-        return view('training_center.index', compact('training_centers'));
+        return view('training_center.index', compact('trainingCenters'));
     }
 
     public function create()
     {
         $url = env('URL_SERVER_API');
-        $training_center = Http::get($url . '/training_centers')->json();
+        $training_center = $this->fetchDataFromApi($url . '/training_centers');
 
         return view('training_center.create', compact('training_center'));
     }

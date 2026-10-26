@@ -9,14 +9,14 @@
 
             <div class="card-body">
 
-                <p><strong>ID:</strong> {{ $computer->id }}</p>
+                <p><strong>ID:</strong> {{ $computer['id'] ?? '' }}</p>
 
-                <p><strong>Número:</strong> {{ $computer->number }}</p>
+                <p><strong>Número:</strong> {{ $computer['number'] ?? '' }}</p>
 
-                <p><strong>Marca:</strong> {{ $computer->brand }}</p>
+                <p><strong>Marca:</strong> {{ $computer['brand'] ?? '' }}</p>
 
                 @auth
-                    <a href="{{ route('computer.edit', $computer->id) }}" class="btn btn-warning">
+                    <a href="{{ route('computer.edit', $computer['id'] ?? '') }}" class="btn btn-warning">
                         Editar
                     </a>
                 @endauth

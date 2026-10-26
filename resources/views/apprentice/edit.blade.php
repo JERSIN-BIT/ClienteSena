@@ -18,7 +18,7 @@
                 <span>Modifica los datos que necesites actualizar</span>
             </div>
 
-            <form action="{{ route('apprentice.update', $apprentice->id) }}" method="POST">
+            <form action="{{ route('apprentice.update', $apprentice['id'] ?? '') }}" method="POST">
 
                 @csrf
                 @method('PUT')
@@ -29,21 +29,21 @@
                         <label for="name">Nombre</label>
 
                         <input type="text" name="name" id="name" class="form-control"
-                            value="{{ $apprentice->name }}" required>
+                            value="{{ $apprentice['name'] ?? '' }}" required>
                     </div>
 
                     <div class="form-group">
                         <label for="email">Correo</label>
 
                         <input type="email" name="email" id="email" class="form-control"
-                            value="{{ $apprentice->email }}" required>
+                            value="{{ $apprentice['email'] ?? '' }}" required>
                     </div>
 
                     <div class="form-group">
                         <label for="cell_number">Número de celular</label>
 
                         <input type="text" name="cell_number" id="cell_number" class="form-control"
-                            value="{{ $apprentice->cell_number }}" required>
+                            value="{{ $apprentice['cell_number'] ?? '' }}" required>
                     </div>
 
                     <div class="form-group">
@@ -51,10 +51,10 @@
 
                         <select name="course_id" id="course_id" class="form-select" required>
 
-                            @foreach ($courses as $course)
-                                <option value="{{ $course->id }}"
-                                    {{ $apprentice->course_id == $course->id ? 'selected' : '' }}>
-                                    {{ $course->course_number }}
+                            @foreach (($courses ?? []) as $course)
+                                <option value="{{ $course['id'] ?? '' }}"
+                                    {{ ($apprentice['course_id'] ?? null) == ($course['id'] ?? null) ? 'selected' : '' }}>
+                                    {{ $course['course_number'] ?? '' }}
                                 </option>
                             @endforeach
 
@@ -66,10 +66,10 @@
 
                         <select name="computer_id" id="computer_id" class="form-select" required>
 
-                            @foreach ($computers as $computer)
-                                <option value="{{ $computer->id }}"
-                                    {{ $apprentice->computer_id == $computer->id ? 'selected' : '' }}>
-                                    {{ $computer->number }}
+                            @foreach (($computers ?? []) as $computer)
+                                <option value="{{ $computer['id'] ?? '' }}"
+                                    {{ ($apprentice['computer_id'] ?? null) == ($computer['id'] ?? null) ? 'selected' : '' }}>
+                                    {{ $computer['number'] ?? '' }}
                                 </option>
                             @endforeach
 

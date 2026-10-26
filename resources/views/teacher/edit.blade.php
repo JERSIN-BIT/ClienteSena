@@ -5,7 +5,7 @@
 
         <h1>EDITAR INSTRUCTOR</h1>
 
-        <form action="{{ route('teacher.update', $teacher->id) }}" method="POST">
+        <form action="{{ route('teacher.update', $teacher['id'] ?? '') }}" method="POST">
 
             @csrf
             @method('PUT')
@@ -14,7 +14,7 @@
 
                 <label>Nombre</label>
 
-                <input type="text" name="name" class="form-control" value="{{ $teacher->name }}" required>
+                <input type="text" name="name" class="form-control" value="{{ $teacher['name'] ?? '' }}" required>
 
             </div>
 
@@ -22,7 +22,7 @@
 
                 <label>Correo</label>
 
-                <input type="email" name="email" class="form-control" value="{{ $teacher->email }}" required>
+                <input type="email" name="email" class="form-control" value="{{ $teacher['email'] ?? '' }}" required>
 
             </div>
 
@@ -32,10 +32,10 @@
 
                 <select name="area_id" class="form-select">
 
-                    @foreach ($areas as $area)
-                        <option value="{{ $area->id }}" {{ $teacher->area_id == $area->id ? 'selected' : '' }}>
+                    @foreach (($areas ?? []) as $area)
+                        <option value="{{ $area['id'] ?? '' }}" {{ ($teacher['area_id'] ?? null) == ($area['id'] ?? null) ? 'selected' : '' }}>
 
-                            {{ $area->name }}
+                            {{ $area['name'] ?? '' }}
 
                         </option>
                     @endforeach
@@ -50,11 +50,11 @@
 
                 <select name="training_center_id" class="form-select">
 
-                    @foreach ($training_centers as $center)
-                        <option value="{{ $center->id }}"
-                            {{ $teacher->training_center_id == $center->id ? 'selected' : '' }}>
+                    @foreach (($training_centers ?? []) as $center)
+                        <option value="{{ $center['id'] ?? '' }}"
+                            {{ ($teacher['training_center_id'] ?? null) == ($center['id'] ?? null) ? 'selected' : '' }}>
 
-                            {{ $center->name }}
+                            {{ $center['name'] ?? '' }}
 
                         </option>
                     @endforeach

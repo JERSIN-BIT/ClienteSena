@@ -7,13 +7,6 @@ use Illuminate\Support\Facades\Http;
 
 class AreaController extends Controller
 {
-    // Método privado para obtener datos de la API
-    private function fetchDataFromApi($url)
-    {
-        $response = Http::get($url);
-        return $response->json();
-    }
-
     public function index()
     {
         $url = env('URL_SERVER_API');
@@ -25,7 +18,7 @@ class AreaController extends Controller
     public function create()
     {
         $url = env('URL_SERVER_API');
-        $area = Http::get($url . '/areas')->json();
+        $area = $this->fetchDataFromApi($url . '/areas');
 
         return view('area.create', compact('area'));
     }

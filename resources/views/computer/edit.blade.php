@@ -5,7 +5,7 @@
 
         <h1>EDITAR COMPUTADOR</h1>
 
-        <form action="{{ route('computer.update', $computer->id) }}" method="POST">
+        <form action="{{ route('computer.update', $computer['id'] ?? '') }}" method="POST">
 
             @csrf
             @method('PUT')
@@ -14,7 +14,7 @@
 
                 <label>Número</label>
 
-                <input type="text" name="number" class="form-control" value="{{ $computer->number }}" required>
+                <input type="text" name="number" class="form-control" value="{{ $computer['number'] ?? '' }}" required>
 
             </div>
 
@@ -22,7 +22,7 @@
 
                 <label>Marca</label>
 
-                <input type="text" name="brand" class="form-control" value="{{ $computer->brand }}" required>
+                <input type="text" name="brand" class="form-control" value="{{ $computer['brand'] ?? '' }}" required>
 
             </div>
 

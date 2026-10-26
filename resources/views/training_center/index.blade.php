@@ -8,7 +8,7 @@
             <h1>LISTAR CENTROS DE FORMACIÓN</h1>
 
             @auth
-                <a href="{{ route('trainingcenter.create') }}" class="btn btn-success">
+                <a href="{{ route('training_center.create') }}" class="btn btn-success">
                     + Nuevo centro
                 </a>
             @endauth
@@ -32,17 +32,17 @@
 
             <tbody>
 
-                @forelse($trainingCenters as $trainingCenter)
+                @forelse(($trainingCenters ?? []) as $trainingCenter)
                     <tr>
 
-                        <td>{{ $trainingCenter->id }}</td>
+                        <td>{{ $trainingCenter['id'] ?? '' }}</td>
 
-                        <td>{{ $trainingCenter->name }}</td>
+                        <td>{{ $trainingCenter['name'] ?? '' }}</td>
 
-                        <td>{{ $trainingCenter->location }}</td>
+                        <td>{{ $trainingCenter['location'] ?? '' }}</td>
 
                         <td>
-                            <a href="{{ route('trainingcenter.show', $trainingCenter->id) }}"
+                            <a href="{{ route('training_center.show', $trainingCenter['id'] ?? '') }}"
                                 class="btn btn-info btn-sm text-white">
                                 Mostrar
                             </a>
@@ -50,13 +50,13 @@
 
                         @auth
                             <td>
-                                <a href="{{ route('trainingcenter.edit', $trainingCenter->id) }}" class="btn btn-warning btn-sm">
+                                <a href="{{ route('training_center.edit', $trainingCenter['id'] ?? '') }}" class="btn btn-warning btn-sm">
                                     Editar
                                 </a>
                             </td>
 
                             <td>
-                                <form action="{{ route('trainingcenter.destroy', $trainingCenter->id) }}" method="POST">
+                                <form action="{{ route('training_center.destroy', $trainingCenter['id'] ?? '') }}" method="POST">
 
                                     @csrf
                                     @method('DELETE')

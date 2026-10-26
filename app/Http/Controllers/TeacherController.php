@@ -7,12 +7,6 @@ use Illuminate\Support\Facades\Http;
 
 class TeacherController extends Controller
 {
-    private function fetchDataFromApi($url)
-    {
-        $response = Http::get($url);
-        return $response->json();
-    }
-
     public function index()
     {
         $url = env('URL_SERVER_API');
@@ -24,9 +18,10 @@ class TeacherController extends Controller
     public function create()
     {
         $url = env('URL_SERVER_API');
-        $teacher = Http::get($url . '/teachers')->json();
+        $areas = $this->fetchDataFromApi($url . '/areas');
+        $training_centers = $this->fetchDataFromApi($url . '/training_centers');
 
-        return view('teacher.create', compact('teacher'));
+        return view('teacher.create', compact('areas', 'training_centers'));
     }
 
     public function store(Request $request)
@@ -49,8 +44,10 @@ class TeacherController extends Controller
     {
         $url = env('URL_SERVER_API');
         $teacher = $this->fetchDataFromApi($url . '/teachers/' . $id);
+        $areas = $this->fetchDataFromApi($url . '/areas');
+        $training_centers = $this->fetchDataFromApi($url . '/training_centers');
 
-        return view('teacher.edit', compact('teacher'));
+        return view('teacher.edit', compact('teacher', 'areas', 'training_centers'));
     }
 
     public function update(Request $request, $id)

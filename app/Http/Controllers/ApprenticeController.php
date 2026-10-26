@@ -7,12 +7,6 @@ use Illuminate\Support\Facades\Http;
 
 class ApprenticeController extends Controller
 {
-    private function fetchDataFromApi($url)
-    {
-        $response = Http::get($url);
-        return $response->json();
-    }
-
     public function index()
     {
         $url = env('URL_SERVER_API');

@@ -9,12 +9,12 @@
 
             <div class="card-body">
 
-                <p><strong>ID:</strong> {{ $area->id }}</p>
+                <p><strong>ID:</strong> {{ $area['id'] ?? '' }}</p>
 
-                <p><strong>Nombre:</strong> {{ $area->name }}</p>
+                <p><strong>Nombre:</strong> {{ $area['name'] ?? '' }}</p>
 
                 @auth
-                    <a href="{{ route('area.edit', $area->id) }}" class="btn btn-warning">
+                    <a href="{{ route('area.edit', $area['id'] ?? '') }}" class="btn btn-warning">
                         Editar
                     </a>
                 @endauth

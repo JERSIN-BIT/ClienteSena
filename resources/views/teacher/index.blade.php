@@ -34,30 +34,30 @@
 
             <tbody>
 
-                @forelse($teachers as $teacher)
+                @forelse(($teachers ?? []) as $teacher)
                     <tr>
 
-                        <td>{{ $teacher->id }}</td>
-                        <td>{{ $teacher->name }}</td>
-                        <td>{{ $teacher->email }}</td>
-                        <td>{{ $teacher->area_id }}</td>
-                        <td>{{ $teacher->training_center_id }}</td>
+                        <td>{{ $teacher['id'] ?? '' }}</td>
+                        <td>{{ $teacher['name'] ?? '' }}</td>
+                        <td>{{ $teacher['email'] ?? '' }}</td>
+                        <td>{{ $teacher['area_id'] ?? '' }}</td>
+                        <td>{{ $teacher['training_center_id'] ?? '' }}</td>
 
                         <td>
-                            <a href="{{ route('teacher.show', $teacher->id) }}" class="btn btn-info btn-sm text-white">
+                            <a href="{{ route('teacher.show', $teacher['id'] ?? '') }}" class="btn btn-info btn-sm text-white">
                                 Mostrar
                             </a>
                         </td>
 
                         @auth
                             <td>
-                                <a href="{{ route('teacher.edit', $teacher->id) }}" class="btn btn-warning btn-sm">
+                                <a href="{{ route('teacher.edit', $teacher['id'] ?? '') }}" class="btn btn-warning btn-sm">
                                     Editar
                                 </a>
                             </td>
 
                             <td>
-                                <form action="{{ route('teacher.destroy', $teacher->id) }}" method="POST">
+                                <form action="{{ route('teacher.destroy', $teacher['id'] ?? '') }}" method="POST">
 
                                     @csrf
                                     @method('DELETE')

@@ -7,7 +7,7 @@
             <div>
                 <span class="eyebrow">Centro de control</span>
                 <h1>Administración SENADMIN</h1>
-                <p>Bienvenido, {{ auth()->user()->name }}. Gestiona la operación del centro de formación.</p>
+                <p>Bienvenido. Gestiona la operación del centro de formación.</p>
             </div>
         </div>
 
@@ -107,8 +107,8 @@
                                     <h3>Centros de formación</h3>
                                     <p>Administra los centros asociados al sistema.</p>
                                     <div class="admin-module-actions">
-                                        <a href="{{ route('trainingcenter.create') }}" class="btn btn-success">Agregar</a>
-                                        <a href="{{ route('trainingcenter.index') }}" class="btn btn-outline-success">Ver
+                                        <a href="{{ route('training_center.create') }}" class="btn btn-success">Agregar</a>
+                                        <a href="{{ route('training_center.index') }}" class="btn btn-outline-success">Ver
                                             registros</a>
                                     </div>
                                 </article>

@@ -9,19 +9,19 @@
 
             <div class="card-body">
 
-                <p><strong>ID:</strong> {{ $trainingCenter->id }}</p>
+                <p><strong>ID:</strong> {{ $training_center['id'] ?? '' }}</p>
 
-                <p><strong>Nombre:</strong> {{ $trainingCenter->name }}</p>
+                <p><strong>Nombre:</strong> {{ $training_center['name'] ?? '' }}</p>
 
-                <p><strong>Ubicación:</strong> {{ $trainingCenter->location }}</p>
+                <p><strong>Ubicación:</strong> {{ $training_center['location'] ?? '' }}</p>
 
                 @auth
-                    <a href="{{ route('trainingcenter.edit', $trainingCenter->id) }}" class="btn btn-warning">
+                    <a href="{{ route('training_center.edit', $training_center['id'] ?? '') }}" class="btn btn-warning">
                         Editar
                     </a>
                 @endauth
 
-                <a href="{{ route('trainingcenter.index') }}" class="btn btn-secondary">
+                <a href="{{ route('training_center.index') }}" class="btn btn-secondary">
                     Volver
                 </a>
 

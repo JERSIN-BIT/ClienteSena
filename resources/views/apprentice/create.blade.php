@@ -49,9 +49,9 @@
 
                             <option value="">Seleccione un curso</option>
 
-                            @foreach ($courses as $course)
-                                <option value="{{ $course->id }}">
-                                    {{ $course->course_number }}
+                            @foreach (($courses ?? []) as $course)
+                                <option value="{{ $course['id'] ?? '' }}">
+                                    {{ $course['course_number'] ?? '' }}
                                 </option>
                             @endforeach
 
@@ -65,9 +65,9 @@
 
                             <option value="">Seleccione un computador</option>
 
-                            @foreach ($computers as $computer)
-                                <option value="{{ $computer->id }}">
-                                    {{ $computer->number }}
+                            @foreach (($computers ?? []) as $computer)
+                                <option value="{{ $computer['id'] ?? '' }}">
+                                    {{ $computer['number'] ?? '' }}
                                 </option>
                             @endforeach
 

@@ -5,7 +5,7 @@
 
         <h1>CREAR CENTRO DE FORMACIÓN</h1>
 
-        <form action="{{ route('trainingcenter.store') }}" method="POST">
+        <form action="{{ route('training_center.store') }}" method="POST">
 
             @csrf
 
@@ -29,7 +29,7 @@
                 Guardar
             </button>
 
-            <a href="{{ route('trainingcenter.index') }}" class="btn btn-secondary">
+            <a href="{{ route('training_center.index') }}" class="btn btn-secondary">
                 Cancelar
             </a>
 

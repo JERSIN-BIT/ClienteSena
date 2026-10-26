@@ -7,12 +7,6 @@ use Illuminate\Support\Facades\Http;
 
 class ComputerController extends Controller
 {
-    private function fetchDataFromApi($url)
-    {
-        $response = Http::get($url);
-        return $response->json();
-    }
-
     public function index()
     {
         $url = env('URL_SERVER_API');
@@ -24,7 +18,7 @@ class ComputerController extends Controller
     public function create()
     {
         $url = env('URL_SERVER_API');
-        $computer = Http::get($url . '/computers')->json();
+        $computer = $this->fetchDataFromApi($url . '/computers');
 
         return view('computer.create', compact('computer'));
     }

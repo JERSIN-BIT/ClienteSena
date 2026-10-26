@@ -32,28 +32,28 @@
 
             <tbody>
 
-                @forelse($computers as $computer)
+                @forelse(($computers ?? []) as $computer)
                     <tr>
 
-                        <td>{{ $computer->id }}</td>
-                        <td>{{ $computer->number }}</td>
-                        <td>{{ $computer->brand }}</td>
+                        <td>{{ $computer['id'] ?? '' }}</td>
+                        <td>{{ $computer['number'] ?? '' }}</td>
+                        <td>{{ $computer['brand'] ?? '' }}</td>
 
                         <td>
-                            <a href="{{ route('computer.show', $computer->id) }}" class="btn btn-info btn-sm text-white">
+                            <a href="{{ route('computer.show', $computer['id'] ?? '') }}" class="btn btn-info btn-sm text-white">
                                 Mostrar
                             </a>
                         </td>
 
                         @auth
                             <td>
-                                <a href="{{ route('computer.edit', $computer->id) }}" class="btn btn-warning btn-sm">
+                                <a href="{{ route('computer.edit', $computer['id'] ?? '') }}" class="btn btn-warning btn-sm">
                                     Editar
                                 </a>
                             </td>
 
                             <td>
-                                <form action="{{ route('computer.destroy', $computer->id) }}" method="POST">
+                                <form action="{{ route('computer.destroy', $computer['id'] ?? '') }}" method="POST">
 
                                     @csrf
                                     @method('DELETE')

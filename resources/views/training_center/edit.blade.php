@@ -5,7 +5,7 @@
 
         <h1>EDITAR CENTRO DE FORMACIÓN</h1>
 
-        <form action="{{ route('trainingcenter.update', $trainingCenter->id) }}" method="POST">
+        <form action="{{ route('training_center.update', $training_center['id'] ?? '') }}" method="POST">
 
             @csrf
             @method('PUT')
@@ -14,7 +14,7 @@
 
                 <label>Nombre</label>
 
-                <input type="text" name="name" class="form-control" value="{{ $trainingCenter->name }}" required>
+                <input type="text" name="name" class="form-control" value="{{ $training_center['name'] ?? '' }}" required>
 
             </div>
 
@@ -22,7 +22,7 @@
 
                 <label>Ubicación</label>
 
-                <input type="text" name="location" class="form-control" value="{{ $trainingCenter->location }}" required>
+                <input type="text" name="location" class="form-control" value="{{ $training_center['location'] ?? '' }}" required>
 
             </div>
 
@@ -30,7 +30,7 @@
                 Actualizar
             </button>
 
-            <a href="{{ route('trainingcenter.index') }}" class="btn btn-secondary">
+            <a href="{{ route('training_center.index') }}" class="btn btn-secondary">
                 Cancelar
             </a>
 

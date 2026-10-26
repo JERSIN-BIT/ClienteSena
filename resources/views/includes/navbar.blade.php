@@ -7,7 +7,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="navbar-item"><a class="nav-link" href="{{ route('area.index') }}">Áreas</a></li>
-                <li class="navbar-item"><a class="nav-link" href="{{ route('trainingcenter.index') }}">Centros</a></li>
+                <li class="navbar-item"><a class="nav-link" href="{{ route('training_center.index') }}">Centros</a></li>
                 <li class="navbar-item"><a class="nav-link" href="{{ route('computer.index') }}">Computadores</a></li>
                 <li class="navbar-item"><a class="nav-link" href="{{ route('teacher.index') }}">Instructores</a></li>
                 <li class="navbar-item"><a class="nav-link" href="{{ route('course.index') }}">Cursos</a></li>

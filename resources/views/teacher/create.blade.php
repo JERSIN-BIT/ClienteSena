@@ -28,9 +28,9 @@
 
                     <option value="">Seleccione un área</option>
 
-                    @foreach ($areas as $area)
-                        <option value="{{ $area->id }}">
-                            {{ $area->name }}
+                    @foreach (($areas ?? []) as $area)
+                        <option value="{{ $area['id'] ?? '' }}">
+                            {{ $area['name'] ?? '' }}
                         </option>
                     @endforeach
 
@@ -44,9 +44,9 @@
 
                     <option value="">Seleccione un centro</option>
 
-                    @foreach ($training_centers as $center)
-                        <option value="{{ $center->id }}">
-                            {{ $center->name }}
+                    @foreach (($training_centers ?? []) as $center)
+                        <option value="{{ $center['id'] ?? '' }}">
+                            {{ $center['name'] ?? '' }}
                         </option>
                     @endforeach
 
